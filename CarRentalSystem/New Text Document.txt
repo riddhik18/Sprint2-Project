@@ -1,0 +1,8 @@
+<style>
+            body {
+                background-image: url('https://shelfstudio.com/wp-content/uploads/2018/12/10-company-booking-background.jpg');
+                background-size: cover; 
+                background-repeat: no-repeat; 
+                background-attachment: fixed; 
+            }
+        </style>

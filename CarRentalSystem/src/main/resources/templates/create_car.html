@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Car Management System</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">Car Management System</a>
+
+    <!-- Toggler/collapsible Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/cars}">Car Management</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+            <h1 class="text-center">Select Car</h1>
+            <div class="card-body">
+                <form th:action="@{/cars}" th:object="${car}" method="POST">
+                    <div class="form-group">
+                        <label>Car Brand</label>
+                        <select id="carBrand" name="brand" class="form-control">
+							<option value="Select">Select</option>
+                            <option value="Toyota">Toyota</option>
+                            <option value="Honda">Honda</option>
+                            <option value="Chevrolet">Chevrolet</option>
+                            <option value="Hyundai">Hyundai</option>
+                            <option value="Kia">Kia</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="carModelDiv">
+                        <label>Car Model</label>
+                        <select name="model" th:field="*{model}" class="form-control" required>
+                            <!-- Options will be dynamically populated using JavaScript -->
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Car Colour</label>
+                        <input type="text" name="colour" th:field="*{colour}" class="form-control"
+                               placeholder="Enter Car Colour"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Registration Number</label>
+                        <input type="text" name="registrationNumber" th:field="*{registrationNumber}"
+                               class="form-control" placeholder="Enter Registration Number"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Availability</label>
+                        <input type="checkbox" name="available" th:field="*{available}" class="form-check-input"/>
+                    </div>
+
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var carModels = {
+        Toyota: ["Camry", "Fortuner", "Corolla"],
+        Honda: ["Civic", "Amaze", "City"],
+        Chevrolet: ["Impala", "Spark", "Cruze"],
+        Hyundai: ["Creta", "Venue", "Accent"],
+        Kia: ["Sportage", "Carnival", "Rio"]
+    };
+
+    document.getElementById('carBrand').addEventListener('change', function () {
+        var brand = this.value;
+        var carModelSelect = document.querySelector('#carModelDiv select');
+
+        // Clear existing options
+        carModelSelect.innerHTML = '';
+
+        // Add new options based on the selected brand
+        carModels[brand].forEach(function (model) {
+            var option = document.createElement('option');
+            option.value = model;
+            option.text = model;
+            carModelSelect.appendChild(option);
+        });
+    });
+    /*]]>*/
+</script>
+
+</body>
+</html>

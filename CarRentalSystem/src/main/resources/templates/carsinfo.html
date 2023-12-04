@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Car Rental System</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+          
+</head>
+<body style="background-color: gainsboro;"> 
+
+	
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">Car Rental System</a>
+
+    <!-- Toggler/collapsible Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/cars}">Cars</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/bookings}">Bookings</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/customers}">Customers</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/payments}">Payment</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/registration}">Registration</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container d-flex flex-column align-items-center mt-4">
+    <div class="row">
+        <h1>Cars</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3">
+            <a th:href="@{/cars/new}" class="btn btn-primary btn-sm mb-3">Select Car</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <table class="table table-striped table-bordered">
+            <thead class="table-dark">
+            <tr>
+                <th>Car Brand</th>
+                <th>Car Model</th>
+                <th>Car Colour</th>
+                <th>Registration</th>
+                <th>Availability</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="car: ${cars}">
+                <td th:text="${car.brand}"></td>
+                <td th:text="${car.model}"></td>
+                <td th:text="${car.colour}"></td>
+                <td th:text="${car.registrationNumber}"></td>
+                <td th:text="${car.available}"></td>
+                <td>
+                    <a th:href="@{/cars/edit/{id}(id=${car.id})}" class="btn btn-primary">Update</a>
+                    <a th:href="@{/cars/delete/{id}(id=${car.id})}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
